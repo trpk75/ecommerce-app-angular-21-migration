@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector : 'menu',
+  standalone: false,
   template : `
   <nav class="navbar navbar-expand-lg navbar-light bg-light d-print-none">
   <a class="navbar-brand" href="#" routerLink = '/products'><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROSGhNugPi-wkkvEePwHNppt8AaZRlUk-y9yEapagLNUaXxy_G" class="logo mr-2"/>Trend Shopping</a>

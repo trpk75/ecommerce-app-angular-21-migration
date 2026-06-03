@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BillingFormModel } from '../../model/billingformfields.model';
 
 @Component({
+  standalone: false,
   template:`
   <menu></menu>
   <div class="container">

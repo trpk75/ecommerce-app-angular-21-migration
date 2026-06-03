@@ -3,6 +3,7 @@ import { CartService } from '../../services/cart.service';
 import { ProductsModel } from '../../model/products.model';
 
 @Component({
+  standalone: false,
   template:`
    <menu></menu>
   <div class="container">

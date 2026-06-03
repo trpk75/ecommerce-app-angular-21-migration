@@ -2,9 +2,11 @@ import { Component,Input,Output } from '@angular/core';
 import { StorageService } from '../services/storage.service';
 import { CartService } from '../services/cart.service';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 //import { emailValidation } from '../validations/custom.validate';
 @Component({
   selector : 'billing-dir',
+  standalone: false,
   template : `
       <form [formGroup]="billingForm" (ngSubmit) = "send()">
       
@@ -58,6 +60,7 @@ export class BillingDir{
     public fb:FormBuilder,
     public storage:StorageService,
     public cart:CartService,
+    private router: Router,
   ){
 
   }
@@ -88,8 +91,8 @@ send(){
     
     this.storage.set({
       customerInfo:this.billingForm.value
-    })
-    document.location.href="/checkout";
+    });
+    this.router.navigate(['/checkout']);
   }
 }
 }

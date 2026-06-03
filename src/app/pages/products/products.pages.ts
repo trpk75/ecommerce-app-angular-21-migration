@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProductsModel } from '../../model/products.model';
 
 @Component({
+  standalone: false,
   template:`
  <menu></menu>
   <div class="container">
@@ -53,6 +54,7 @@ export class ProductsPage{
     public cartflag:boolean= false;
     public sortBy: string ='';
     public sortOption: string ='product_name|asc';
+    public searchText: string = '';
   constructor (
     public products:ProductsModel
     
@@ -62,7 +64,7 @@ export class ProductsPage{
   ngOnInit(){
     this.ref();
   }
-  ref(){
+  ref(_event?: unknown){
     this.cartflag = false;
     setTimeout( () => {
         this.cartflag = true;

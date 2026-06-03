@@ -2,8 +2,10 @@ import { Component,Input } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { StorageService } from '../services/storage.service';
 import { CompanyDetailsModel } from '../model/companydetails.model';
+import { Router } from '@angular/router';
 @Component({
   selector : 'checkout-dir',
+  standalone: false,
   template : ` 
 
  
@@ -149,7 +151,8 @@ export class CheckOutDir{
   constructor(
     public cart: CartService,
     public storage: StorageService,
-    public company: CompanyDetailsModel
+    public company: CompanyDetailsModel,
+    private router: Router
   ){
 
   }
@@ -159,23 +162,19 @@ export class CheckOutDir{
     this.companyDetails = this.company.companyInfo;
     this.cart.allItems = this.__allprdts;
     this.cart.listCartItems();
-    this.checkOutFlag = JSON.parse(this.storage.get('mycart'));
+    this.checkOutFlag = this.storage.get('mycart');
   
   }
   clearCart(){
-    let temp = {};
-    localStorage.setItem(this.storage.storageName,JSON.stringify(temp));
-    
-    //this.checkOutFlag = Object.keys(this.storage.get()).length;
-    //console.log(this.checkOutFlag)
-    document.location.href='/products';
+    this.cart.emptyCart();
+    this.storage.delete('customerInfo');
+    this.router.navigate(['/products']);
   }
 
   print(){
-    let temp = {};
-    localStorage.setItem(this.storage.storageName,JSON.stringify(temp));
-window.focus();
-window.print();
+    this.cart.emptyCart();
+    window.focus();
+    window.print();
 }
  
   

@@ -5,6 +5,7 @@ import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'productslist-dir',
+  standalone: false,
   template: `
   
   <div class="row">  
@@ -53,14 +54,14 @@ export class ProductsListDir {
   @Input("searchedText") __searchedProduct: string='';
   @Input("sortingBy") sortByOption: string='';
   
-  @Output() refresh:EventEmitter<string> = new EventEmitter(); 
+  @Output() refresh:EventEmitter<boolean> = new EventEmitter(); 
 
   ngOnInit(){
     this.sortByOption = 'product_name';
   }
-  addToCart(productId,productQty){    
+  addToCart(productId, productQty, replace = ''){    
     this.cart.allItems = this.__allprdts;
-    this.cart.addToCart(productId,productQty,'');
+    this.cart.addToCart(productId, productQty, replace);
     this.refresh.emit(true);
   }
 
